@@ -1,7 +1,18 @@
+# まえがき
 # Prelude
+
+> 良いものと素晴らしいものを分けるものがスタイルである。<br/>
+> -- Bozhidar Batsov
 
 > Style is what separates the good from the great. <br/>
 > -- Bozhidar Batsov
+
+Ruby 開発者として私が常に頭を悩ませるのは、Python 開発者には素晴らしい
+プログラミングスタイルリファレンス
+([PEP-8](http://www.python.org/dev/peps/pep-0008/))
+があるのに、Ruby にはコーディングスタイルとベストプラクティスの公式なガイドが
+無いことだ。私はスタイルが意味をもつと信じている。
+また、我々、良い Ruby 開発者は、待ち望まれていたこの文章を作りだすことができるとも信じている。
 
 One thing has always bothered me as Ruby developer - Python developers
 have a great programming style reference
@@ -11,6 +22,12 @@ practices. And I do believe that style matters. I also believe that
 such fine fellows, like us Ruby developers, should be quite capable to
 produce this coveted document.
 
+このガイドは会社の内部的な Ruby コーディングガイドラインとして始まった。
+ある時点で、私がやっている仕事は一般的な Ruby コミュニティのメンバにとって
+興味深いかもしれないし、世間的には別の会社内部ガイドラインは必要ないかもしれない
+と思った。しかし、コミュニティドリブンでコミュニティに支持されている
+プラクティスの集合、イディオム、スタイルルールによって世間が恩恵をうけることも確かだ。
+
 This guide started its life as our internal company Ruby coding guidelines
 (written by yours truly). At some point I decided that the work I was
 doing might be interesting to members of the Ruby community in general
@@ -19,10 +36,20 @@ guideline. But the world could certainly benefit from a
 community-driven and community-sanctioned set of practices, idioms and
 style prescriptions for Ruby programming.
 
+このガイドは、初めから
+世界中の優秀な Ruby コミュニティのメンバから多くのフィードバックを受けることが
+できた。
+全ての提案とサポートに感謝します。
+資料を互いに、また全ての Ruby 開発者にも有益にしていきましょう。
+
 Since the inception of the guide I've received a lot of feedback from
 members of the exceptional Ruby community around the world. Thanks for
 all the suggestions and the support! Together we can make a resource
 beneficial to each and every Ruby developer out there.
+
+あなたが Rails に取り組んでいるなら、このガイドの補足である
+[Ruby on Rails 3 Style Guide](https://github.com/bbatsov/rails-style-guide)
+もチェックするといいかもしれない。
 
 By the way, if you're into Rails you might want to check out the
 complementary
