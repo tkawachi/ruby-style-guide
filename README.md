@@ -55,7 +55,24 @@ By the way, if you're into Rails you might want to check out the
 complementary
 [Ruby on Rails 3 Style Guide](https://github.com/bbatsov/rails-style-guide).
 
+## 目次
 ## Table of Contents
+
+* [Ruby スタイルガイド](#guide)
+    * [ソースコードレイアウト](#layout)
+    * [文法](#syntax)
+    * [名前付け](#naming)
+    * [コメント](#comments)
+    * [注釈](#annotations)
+    * [クラス](#classes)
+    * [例外](#exceptions)
+    * [コレクション](#collections)
+    * [文字列](#strings)
+    * [パーセントリテラル](#literals)
+    * [その他](#misc)
+    * [設計](#design)
+* [貢献する](#contributing)
+* [広める](#spreadtheword)
 
 * [The Ruby Style Guide](#guide)
     * [Source Code Layout](#layout)
@@ -73,7 +90,15 @@ complementary
 * [Contributing](#contributing)
 * [Spread the word](#spreadtheword)
 
+# Ruby スタイルガイド
 # The Ruby Style Guide
+
+Ruby スタイルガイドは、現実世界で他の Ruby プログラマがメンテナンスできる
+コードを書けるようにするベストプラクティスを推奨する。
+A style guide that reflects real-world usage gets used, and a
+style guide that holds to an ideal that has been rejected by the people it is
+supposed to help risks not getting used at all &ndash; no matter how good it is.
+
 
 This Ruby style guide recommends best practices so that real-world Ruby
 programmers can write code that can be maintained by other real-world Ruby
@@ -81,9 +106,20 @@ programmers. A style guide that reflects real-world usage gets used, and a
 style guide that holds to an ideal that has been rejected by the people it is
 supposed to help risks not getting used at all &ndash; no matter how good it is.
 
+ガイドは関連するルールによっていくつかのセクションに分かれている。
+ルールには根拠を付与するようにトライした。
+(省略されている場合は、十分明白だとみなした場合である。)
+
 The guide is separated into several sections of related rules. I've
 tried to add the rationale behind the rules (if it's omitted I've
 assumed that is pretty obvious).
+
+全てのルールはどこからともない思いつきではない。
+プロフェッショナルソフトウェアエンジニアとして広範囲に渡る私のキャリア、
+Ruby コミュニティのメンバーからのフィードバックや提案、
+["Programming Ruby 1.9"](http://pragprog.com/book/ruby3/programming-ruby-1-9)
+や ["The Ruby Programming Language"](http://www.amazon.com/Ruby-Programming-Language-David-Flanagan/dp/0596516177)
+といった重要視されている Ruby プログラミング資料が基礎になっている。
 
 I didn't come up with all the rules out of nowhere - they are mostly
 based on my extensive career as a professional software engineer,
@@ -92,15 +128,23 @@ various highly regarded Ruby programming resources, such as
 ["Programming Ruby 1.9"](http://pragprog.com/book/ruby3/programming-ruby-1-9)
 and ["The Ruby Programming Language"](http://www.amazon.com/Ruby-Programming-Language-David-Flanagan/dp/0596516177).
 
+このガイドはまだ作業中だ - いくつかのルールは例が不足しているし、
+明瞭に説明する例を欠いているものもある。
+期限内にこれらの問題は解決される予定だ - 今は心に留めておいてほしい。
+
 The guide is still a work in progress - some rules are lacking
 examples, some rules don't have examples that illustrate them clearly
 enough. In due time these issues will be addressed - just keep them in
 mind for now.
 
+[Transmuter](https://github.com/TechnoGate/transmuter)
+を使ってこのガイドの PDF や HTML 版を生成できる。
+
 You can generate a PDF or an HTML copy of this guide using
 [Transmuter](https://github.com/TechnoGate/transmuter).
 
 <a name="layout">
+## ソースコードレイアウト
 ## Source Code Layout
 
 > Nearly everybody is convinced that every style but their own is
