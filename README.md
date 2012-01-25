@@ -665,23 +665,36 @@ would happen if the current value happened to be `false`.)
   you if you forget either of the rules above!
 
 <a name="naming"/>
+## 名前付け
 ## Naming
+
+> プログラミングでほんとうに難しいのは、キャッシュの無効化と名前付けだけだ。<br/>
+> -- Phil Karlton
 
 > The only real difficulties in programming are cache invalidation and
 > naming things. <br/>
 > -- Phil Karlton
 
+* メソッドと変数には `snake_case` を使うこと。
 * Use `snake_case` for methods and variables.
+* クラスとモジュールには `CamelCase` を使うこと。(HTTP, RFC, XML のような頭字語は大文字のままにしておくこと。)
 * Use `CamelCase` for classes and modules.  (Keep acronyms like HTTP,
   RFC, XML uppercase.)
+* 他の定数には `SCREAMING_SNAKE_CASE` を使うこと。
 * Use `SCREAMING_SNAKE_CASE` for other constants.
+* 述語メソッド(boolean 値を返すメソッド)の名前は、疑問符で終わるべきだ。 (i.e. `Array#empty?`)
 * The names of predicate methods (methods that return a boolean value)
   should end in a question mark.
   (i.e. `Array#empty?`).
+* 潜在的に "危険な" メソッド (i.e. `self` や引数を変更するメソッド, `exit!` など)
+  の名前は感嘆符で終わるべきだ。
 * The names of potentially "dangerous" methods (i.e. methods that modify `self` or the
   arguments, `exit!`, etc.) should end with an exclamation mark.
+* 短いブロックで `inject` を使うときは、引数を `|a, e|` (accumulator, element)と
+  名付けること。
 * When using `inject` with short blocks, name the arguments `|a, e|`
   (accumulator, element).
+* 二項演算子を定義するときは、引数を `other` と名付けること。
 * When defining binary operators, name the argument `other`.
 
     ```Ruby
@@ -690,6 +703,10 @@ would happen if the current value happened to be `false`.)
     end
     ```
 
+* *collect* より `map` を、 *detect* より `find` を、
+  *find_all* より `select` を、 *length* より `size` を
+  好んで使うこと。これは厳しい必要条件ではない。
+  エイリアスのほうが読みやすい場合には、それを使っても良い。
 * Prefer `map` over *collect*, `find` over *detect*, `select` over
   *find_all*, `size` over *length*. This is not a hard requirement; if the
   use of the alias enhances readability, it's ok to use it.
