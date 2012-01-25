@@ -712,7 +712,13 @@ would happen if the current value happened to be `false`.)
   use of the alias enhances readability, it's ok to use it.
 
 <a name="comments"/>
+## コメント
 ## Comments
+
+> 良いコードは最良のドキュメントである。
+> コメントを付けようとしているところなら「コメントが必要ないように、どうやったら改善できるだろう？」と問いかけて欲しい。
+> コードを改善し、それをより明瞭にするためにコメントを付けよ。<br/>
+> -- Steve McConnell
 
 > Good code is its own best documentation. As you're about to add a
 > comment, ask yourself, "How can I improve the code so that this
@@ -720,9 +726,15 @@ would happen if the current value happened to be `false`.)
 > it even clearer. <br/>
 > -- Steve McConnell
 
+* ドキュメントとなるコードを書いて、この節の残りは無視せよ。本気で言ってるよ！
 * Write self-documenting code and ignore the rest of this section. Seriously!
+* 1単語より長いコメントは先頭を大文字にし、句読点を付けること。
+  ピリオドの後ろに
+  [1スペース](http://en.wikipedia.org/wiki/Sentence_spacing)
+  を入れること。
 * Comments longer than a word are capitalized and use punctuation. Use [one
   space](http://en.wikipedia.org/wiki/Sentence_spacing) after periods.
+* 余計なコメントは避けること。
 * Avoid superfluous comments.
 
     ```Ruby
@@ -730,8 +742,13 @@ would happen if the current value happened to be `false`.)
     counter += 1 # increments counter by one
     ```
 
+* すでにあるコメントを最新に保つこと。
+  古いコメントより、コメント無しの方が良い。
 * Keep existing comments up-to-date. No comment is better than an outdated
   comment.
+* 悪いコードを説明するためのコメントを書くのは避けること。
+  説明的なコードになるようにリファクタせよ。
+  (やるかやらないか、だ。 - 試してみる、は無い。)
 * Avoid writing comments to explain bad code. Refactor the code to
   make it self-explanatory. (Do or do not - there is no try.)
 
