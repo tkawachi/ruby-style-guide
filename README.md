@@ -278,8 +278,11 @@ You can generate a PDF or an HTML copy of this guide using
 * Avoid trailing whitespace.
 
 <a name="syntax"/>
+## 文法
 ## Syntax
 
+* 引数があるときは括弧付きの `def` を使うこと。
+  メソッドが引数を取らないときは括弧を省略すること。
 * Use `def` with parentheses when there are arguments. Omit the
   parentheses when the method doesn't accept any arguments.
 
@@ -293,6 +296,11 @@ You can generate a PDF or an HTML copy of this guide using
      end
      ```
 
+* 自分が何をしているか正確に分かっていない限り `for` は使わないこと。
+  殆どの場合イテレータが代わりに使われるべきだ。
+  `for` は `each` にねじりを加えて実装されている -
+  `for` は `each` と異なりスコープを導入しないため、ブロック内で定義された
+  変数は外から見える。
 * Never use `for`, unless you know exactly why. Most of the time iterators
   should be used instead. `for` is implemented in terms of `each` (so
   you're adding a level of indirection), but with a twist - `for`
@@ -311,6 +319,7 @@ You can generate a PDF or an HTML copy of this guide using
     arr.each { |elem| puts elem }
     ```
 
+* 複数行 `if/unless` で `then` を使わないこと
 * Never use `then` for multi-line `if/unless`.
 
     ```Ruby
@@ -325,6 +334,8 @@ You can generate a PDF or an HTML copy of this guide using
     end
     ```
 
+* `if/then/else/end` より三項演算子(`?:`)の使用が好ましい。
+  より一般的に使われており、簡潔である。
 * Favor the ternary operator(`?:`) over `if/then/else/end` constructs.
   It's more common and obviously more concise.
 
@@ -336,6 +347,9 @@ You can generate a PDF or an HTML copy of this guide using
     result = some_condition ? something : something_else
     ```
 
+* 三項演算子の分岐先には1つの式しか置かないこと。
+  これは三項演算子がネストしてはならないことを意味する。
+  そのような場合には `if/else` の使用が好ましい。
 * Use one expression per branch in a ternary operator. This
   also means that ternary operators must not be nested. Prefer
   `if/else` constructs in these cases.
@@ -352,6 +366,8 @@ You can generate a PDF or an HTML copy of this guide using
     end
     ```
 
+* `if x: ...` は使わないこと - Ruby 1.9 で削除される。
+  代わりに三項演算子を使うこと。
 * Never use `if x: ...` - it is removed in Ruby 1.9. Use
   the ternary operator instead.
 
@@ -363,13 +379,19 @@ You can generate a PDF or an HTML copy of this guide using
     result = some_condition ? something : something_else
     ```
 
+* `if x; ...` は使わないこと。代わりに三項演算子を使うこと。
 * Never use `if x; ...`. Use the ternary operator instead.
 
+* 1行 case には `when x then ...` を使うこと。
+  `when x: ...` は Ruby 1.9 で削除される。
 * Use `when x then ...` for one-line cases. The alternative syntax
   `when x: ...` is removed in Ruby 1.9.
 
+* `when x; ...` は使わないこと。前のルールを参照。
 * Never use `when x; ...`. See the previous rule.
 
+* `&&/||` を boolean 式に使い、`and/or` を制御フローに使うこと。
+  (親指のルール: 外側の括弧を使わなければならないとしたら、間違った演算子を使っている)
 * Use `&&/||` for boolean expressions, `and/or` for control flow.  (Rule
   of thumb: If you have to use outer parentheses, you are using the
   wrong operators.)
@@ -384,8 +406,12 @@ You can generate a PDF or an HTML copy of this guide using
     document.saved? or document.save!
     ```
 
+* 複数行にわたる `?:` (三項演算子) は避けること。
+  代わりに `if/unless` を使う。
 * Avoid multi-line `?:` (the ternary operator), use `if/unless` instead.
 
+* Body が 1行の時は `if/unless` 修飾子の使用が好ましい。
+  または `and/or` の制御フローでも良い。
 * Favor modifier `if/unless` usage when you have a single-line
   body. Another good alternative is the usage of control flow `and/or`.
 
@@ -402,6 +428,7 @@ You can generate a PDF or an HTML copy of this guide using
     some_condition and do_something
     ```
 
+* 否定条件には `if` より `unless` (または `or` 制御フロー)の使用が好ましい
 * Favor `unless` over `if` for negative conditions (or control
   flow `or`).
 
@@ -416,6 +443,7 @@ You can generate a PDF or an HTML copy of this guide using
     some_condition or do_something
     ```
 
+* `else` 付き `unless` は使わないこと。肯定ケースを先に書きなおすこと。
 * Never use `unless` with `else`. Rewrite these with the positive case first.
 
     ```Ruby
@@ -433,6 +461,9 @@ You can generate a PDF or an HTML copy of this guide using
       puts 'failure'
     end
     ```
+
+* 条件が代入を含まない限り、`if/unless/while` 条件の周りに括弧をつけないこと。
+  (`=`のリターン値を使用 を参照)
 
 * Don't use parentheses around the condition of an `if/unless/while`,
   unless the condition contains an assignment (see "Using the return
@@ -454,7 +485,10 @@ You can generate a PDF or an HTML copy of this guide using
       # body omitted
     end
     ```
-
+* 内部DSL (e.g. Rake, Rails, RSpec) の一部として提供されるメソッドや、
+  Ruby で "keyword" 状態のメソッド (e.g. `attr_reader`, `puts`)、
+  また属性アクセスメソッドでは括弧を省略すること。
+  それ以外の全てのメソッド呼び出しでは括弧を付けること。
 * Omit parentheses around parameters for methods that are part of an
   internal DSL (e.g. Rake, Rails, RSpec), methods that are with
   "keyword" status in Ruby (e.g. `attr_reader`, `puts`) and attribute
@@ -476,7 +510,12 @@ You can generate a PDF or an HTML copy of this guide using
     x = Math.sin(y)
     array.delete(e)
     ```
-
+* 1行ブロックでは `do...end` より `{...}` が好ましい。
+  複数行ブロックに `{...}` を使うのは避けること
+  (複数行ブロックからなるのメソッドチェインは間違いなく醜い)。
+  "制御フロー" と "メソッド定義" (e.g. Rakefile 内や他の DSL) では常に
+  `do...end` を使うこと。
+  メソッドチェインには `do...end` を使わないこと。
 * Prefer `{...}` over `do...end` for single-line blocks.  Avoid using
   `{...}` for multi-line blocks (multiline chaining is always
   ugly). Always use `do...end` for "control flow" and "method
@@ -503,10 +542,15 @@ You can generate a PDF or an HTML copy of this guide using
     end.map { |name| name.upcase }
     ```
 
+    {...} を使った複数行ブロックからなるメソッドチェインは問題ないという人もいるだろうが、
+    自分自身に問いかけて欲しい - 本当にそのコードは読みやすいか、ブロックの内容を
+    気の利いたメソッドとして抽出できないだろうか、と。
+
     Some will argue that multiline chaining would look OK with the use of {...}, but they should
     ask themselves - it this code really readable and can't the blocks contents be extracted into
     nifty methods.
 
+* 不要な箇所での `return` は避けること。
 * Avoid `return` where not required.
 
     ```Ruby
@@ -520,7 +564,7 @@ You can generate a PDF or an HTML copy of this guide using
       some_arr.size
     end
     ```
-
+* メソッド引数にデフォルト値を代入するとき、`=` 演算子の周りにスペースを入れること。
 * Use spaces around the `=` operator when assigning default values to method parameters:
 
     ```Ruby
@@ -535,9 +579,14 @@ You can generate a PDF or an HTML copy of this guide using
     end
     ```
 
+    前者のスタイルを提案している Ruby 本もあるが、後者のほうが実際にははるかに
+    人目を引く。(そして、議論を呼ぶだろうが、少し読みやすい)
+
     While several Ruby books suggest the first style, the second is much more prominent
     in practice (and arguably a bit more readable).
 
+* 不要な継続行 (\\) は避けること。
+  実際には継続行を全く使わないこと。
 * Avoid line continuation (\\) where not required. In practice, avoid using
   line continuations at all.
 
@@ -551,6 +600,7 @@ You can generate a PDF or an HTML copy of this guide using
              - 2
     ```
 
+* `=` (代入)のリターン値を使用するのは問題ないが、その場合は代入を括弧で囲むこと。
 * Using the return value of `=` (an assignment) is ok, but surround the
   assignment with parenthesis.
 
@@ -565,6 +615,7 @@ You can generate a PDF or an HTML copy of this guide using
     if (v = self.next_value) == "hello" ...
     ```
 
+* 変数の初期化に `||=` は自由に使って良い。
 * Use `||=` freely to initialize variables.
 
     ```Ruby
@@ -572,6 +623,8 @@ You can generate a PDF or an HTML copy of this guide using
     name ||= 'Bozhidar'
     ```
 
+* Boolean 変数の初期化に `||=` を使わないこと。
+  (現在の値が `false` の時に何が起きるか考えてみて)
 * Don't use `||=` to initialize boolean variables. (Consider what
 would happen if the current value happened to be `false`.)
 
@@ -583,10 +636,13 @@ would happen if the current value happened to be `false`.)
     enabled = true if enabled.nil?
     ```
 
+* Perl スタイルの特殊変数 (`$0-9`, `$`` など) を使わないこと。
+  大変不可解であり、1行スクリプト以外では非推奨である。
 * Avoid using Perl-style special variables (like `$0-9`, `$``,
   etc. ). They are quite cryptic and their use in anything but
   one-liner scripts is discouraged.
 
+* メソッド名と開き括弧の間にはスペースを入れないこと。
 * Never put a space between a method name and the opening parenthesis.
 
     ```Ruby
@@ -597,10 +653,14 @@ would happen if the current value happened to be `false`.)
     f(3 + 2) + 1
     ```
 
+* メソッドへの最初の引数が開き括弧で始まる場合は、メソッド呼び出しの括弧を必ず付けること。
+  例えば `f((3 + 2) + 1)` のように書く。
 * If the first argument to a method begins with an open parenthesis,
   always use parentheses in the method invocation. For example, write
 `f((3 + 2) + 1)`.
 
+* Ruby インタプリタを常に `-w` オプション付きで実行すること。
+  上記ルールのどれかを忘れたら警告してくれるよ!
 * Always run the Ruby interpreter with the `-w` option so it will warn
   you if you forget either of the rules above!
 
